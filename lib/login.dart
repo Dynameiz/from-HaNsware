@@ -35,11 +35,11 @@ class _LoginPageState extends State<LoginPage> {
     //
     //}
 
-    Navigator.push(context, MaterialPageRoute(
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
       builder: (context) {
-        return const HomePage();
+        return HomePage(username: usernameController.text);
       }
-    ));
+    ), (route) => false);
   }
 
   @override
@@ -48,55 +48,59 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: const Text("HaNsware"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 48.0, right: 48.0),
-        child: Form(child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: "Email / Username",
+      body: 
+      SingleChildScrollView(child: 
+        Padding(
+        padding: const EdgeInsets.only(top: 48.0, left: 48.0, right: 48.0),
+          child: Form(child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset("./assets/logo.png", fit: BoxFit.cover,),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: "Email / Username",
+                      ),
+                      controller: usernameController,
+                      validator: (String? value){
+                        if(value == null || value.isEmpty){
+                          return "Email / Username is Empty!";
+                        }
+                        return null;
+                      },
+                    ),
                   ),
-                  controller: usernameController,
-                  validator: (String? value){
-                    if(value == null || value.isEmpty){
-                      return "Email / Username is Empty!";
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: "Password",
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: "Password",
+                      ),
+                      controller: passwordController,
+                      obscureText: true,
+                      autocorrect: false,
+                      validator: (String? value) {
+                        if(value == null || value.isEmpty){
+                          return "Password is Empty!";
+                        }
+                        return null;
+                      },
+                    ),
                   ),
-                  controller: passwordController,
-                  obscureText: true,
-                  autocorrect: false,
-                  validator: (String? value) {
-                    if(value == null || value.isEmpty){
-                      return "Password is Empty!";
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
-                child: ElevatedButton(
-                  onPressed: handleLogin,
-                  child: const Text("Login"),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                    child: ElevatedButton(
+                      onPressed: handleLogin,
+                      child: const Text("Login"),
+                    ),
+                  )
+                ],
               )
-            ],
+            ),
           )
-        ),
-      )
-    );
+        )
+      ,);
   }
 }

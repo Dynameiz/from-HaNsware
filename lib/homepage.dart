@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  String username;
+  HomePage({super.key, required this.username});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("HaNsware"),
+      ),
+      body: Container(
+        child: Column(
+          children: [
+            Text("Welcome, " + username),
+          ],
+        ),
+      ),
+    );
   }
 }
