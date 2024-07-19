@@ -1,16 +1,5 @@
-# from_hansware
+# from HaNsware
 
-A new Flutter project.
+![kale](https://github.com/user-attachments/assets/cfd962d5-ae4a-4e35-91bb-b6f052641186)
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+_"Ah, greetings Tarnished! I’m Kale, a humble wanderer of these lands. Managing my store has its challenges, but thanks to an app called HaNsware, crafted by a friend of mine, my tasks have become much easier. It keeps my inventory in check and helps me track my sales. With HaNsware, I can spend less time on tedious work and more on finding rare treasures. It’s a fine tool, truly. Give it a look if you can!"_
