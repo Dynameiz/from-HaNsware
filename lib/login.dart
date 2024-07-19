@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:from_hansware/components/button.dart';
+import 'package:from_hansware/components/credit.dart';
+import 'package:from_hansware/components/passwordfield.dart';
+import 'package:from_hansware/components/textfield.dart';
 import 'package:from_hansware/homepage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -10,34 +14,26 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  MyTextField usernameTF = MyTextField(textHint: "Username / Email");
+  MyPasswordField passwordTF = MyPasswordField(textHint: "Password");
 
   void handleLogin(){
-    String username = usernameController.text;
-    String password = passwordController.text;
-
-    if(username.isEmpty){
+    if(usernameTF.getText().isEmpty){
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Tarnished, who might you be?"))
       );
       return;
     }
-    if(password.isEmpty){
+    if(!passwordTF.isValid()){
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Hmm, are you truly the Tarnished?"))
       );
       return;
     }
 
-    //Validate does the account exist or not
-    //if(...){
-    //
-    //}
-
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
       builder: (context) {
-        return HomePage(username: usernameController.text);
+        return HomePage(username: usernameTF.getText());
       }
     ), (route) => false);
   }
@@ -45,62 +41,79 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 247, 244, 231),
       appBar: AppBar(
-        title: const Text("HaNsware"),
+        backgroundColor: const Color.fromARGB(255, 70, 102, 70),
+        title: const Text("HaNsware", style: TextStyle(color: Colors.white),),
       ),
       body: 
-      SingleChildScrollView(child: 
-        Padding(
-        padding: const EdgeInsets.only(top: 48.0, left: 48.0, right: 48.0),
-          child: Form(child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Image.asset("./assets/logo.png", fit: BoxFit.cover,),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
-                    child: TextFormField(
-                      decoration: const InputDecoration(
-                        hintText: "Email / Username",
+      SingleChildScrollView(
+        child: SafeArea(
+          child: Center(
+              child: Column(
+                  children: <Widget>[
+                    // Logo
+                    const SizedBox(height: 30,),
+                    Image.asset("./assets/logo.png", fit: BoxFit.cover, width: 200.0,),
+
+                    // Text
+                    const SizedBox(height: 20,),
+                    const Text("Ah, welcome back, Tarnished!\nIt's good to see you again.", textAlign: TextAlign.center,),
+
+                    // Username Text Field
+                    const SizedBox(height: 30,),
+                    usernameTF,
+                    // Password Text Field
+                    const SizedBox(height: 10,),
+                    passwordTF,
+
+                    // Forgot Password
+                    const SizedBox(height: 10,),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 24.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "Forgot Password?",
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ],
                       ),
-                      controller: usernameController,
-                      validator: (String? value){
-                        if(value == null || value.isEmpty){
-                          return "Email / Username is Empty!";
-                        }
-                        return null;
-                      },
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                    child: TextFormField(
-                      decoration: const InputDecoration(
-                        hintText: "Password",
+
+                    // Login Button
+                    const SizedBox(height: 20,),
+                    MyButton(onTap: handleLogin, btnText: "Login",),
+
+                    // Sign Up
+                    const SizedBox(height: 10,),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 24.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Don't have an account? ",
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          Text(
+                            "Sign Up",
+                            style: TextStyle(color: Colors.lightBlue)
+                          ),
+                        ],
                       ),
-                      controller: passwordController,
-                      obscureText: true,
-                      autocorrect: false,
-                      validator: (String? value) {
-                        if(value == null || value.isEmpty){
-                          return "Password is Empty!";
-                        }
-                        return null;
-                      },
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
-                    child: ElevatedButton(
-                      onPressed: handleLogin,
-                      child: const Text("Login"),
-                    ),
-                  )
-                ],
-              )
-            ),
+
+                    // Footer
+                    const SizedBox(height: 40.0,),
+                    const MyCredit(),
+                  ],
+                ),
           )
-        )
-      ,);
+        ),
+
+      ),
+    );
   }
 }
