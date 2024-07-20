@@ -25,6 +25,18 @@ class _LoginPageState extends State<LoginPage> {
       );
       return;
     }
+    if(usernameTF.getText().length < 4){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Hmm, Tarnished, your name should be at least 4 characters long."))
+      );
+      return;
+    }
+    if(usernameTF.getText().length > 12){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Ah, Tarnished, your name is a bit lengthy. Twelve characters max."))
+      );
+      return;
+    }
     if(!passwordTF.isValid()){
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Hmm, are you truly the Tarnished?"))
