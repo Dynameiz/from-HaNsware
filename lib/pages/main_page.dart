@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:from_hansware/pages/about_page.dart';
 import 'package:from_hansware/pages/home_page.dart';
 import 'package:from_hansware/pages/item_page.dart';
 import 'package:from_hansware/pages/login_page.dart';
@@ -107,6 +108,13 @@ class _MainPageState extends State<MainPage> {
             ListTile(
               leading: const Icon(Icons.info_outline_rounded),
               title: Text("About", style: GoogleFonts.mulish(),),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context){
+                    return const AboutPage();
+                  },
+                ));
+              },
             ),
 
             const SizedBox(height: 10.0,),
