@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: const Color.fromARGB(255, 247, 244, 231),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 70, 102, 70),
-        title: const Text("HaNsware", style: TextStyle(color: Colors.white),),
+        title: Text("HaNsware", style: GoogleFonts.mulish(color: Colors.white, fontWeight: FontWeight.bold),),
       ),
       body: 
       SingleChildScrollView(
