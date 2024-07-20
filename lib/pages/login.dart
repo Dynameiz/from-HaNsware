@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:from_hansware/components/button.dart';
 import 'package:from_hansware/components/credit.dart';
-import 'package:from_hansware/components/passwordfield.dart';
-import 'package:from_hansware/components/textfield.dart';
-import 'package:from_hansware/homepage.dart';
+import 'package:from_hansware/components/password_field.dart';
+import 'package:from_hansware/components/text_field.dart';
+import 'package:from_hansware/pages/main_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -33,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
 
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
       builder: (context) {
-        return HomePage(username: usernameTF.getText());
+        return MainPage(username: usernameTF.getText());
       }
     ), (route) => false);
   }
@@ -58,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
 
                     // Text
                     const SizedBox(height: 20,),
-                    const Text("Ah, welcome back, Tarnished!\nIt's good to see you again.", textAlign: TextAlign.center,),
+                    Text("Ah, welcome back, Tarnished!\nIt's good to see you again.", textAlign: TextAlign.center, style: GoogleFonts.mulish(),),
 
                     // Username Text Field
                     const SizedBox(height: 30,),

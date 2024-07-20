@@ -2,24 +2,13 @@ import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
 
-  Function()? onTap;
-  String btnText;
+  final Function()? onTap;
+  final String btnText;
 
-  MyButton({super.key, required this.onTap, required this.btnText});
+  const MyButton({super.key, required this.onTap, required this.btnText});
 
   @override
   Widget build(BuildContext context) {
-    // return Padding(
-    //   padding: const EdgeInsets.symmetric(vertical: 24.0),
-    //   child: ElevatedButton(
-    //     onPressed: onClick,
-    //     style: const ButtonStyle(
-    //       backgroundColor: WidgetStatePropertyAll(Color.fromRGBO(253, 216, 53, 1)),
-
-    //     ),
-    //     child: Text(btnText),
-    //   ),
-    // );
     return GestureDetector(
       onTap: onTap,
       child: Container(

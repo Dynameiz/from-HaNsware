@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyPasswordField extends StatelessWidget {
-  String textHint;
-  TextEditingController textController = TextEditingController();
+  final String textHint;
+  final TextEditingController textController = TextEditingController();
 
   MyPasswordField({super.key, required this.textHint});
 
@@ -10,7 +11,7 @@ class MyPasswordField extends StatelessWidget {
     if(textController.text.isEmpty){
       return false;
     }
-    // Database checking
+    // Database validation
     // if(...){
 
     // }
@@ -32,6 +33,7 @@ class MyPasswordField extends StatelessWidget {
           hintStyle: TextStyle(color: Colors.grey[500]),
         ),
         controller: textController,
+        style: GoogleFonts.mulish(),
         obscureText: true,
         autocorrect: false,
       ),
