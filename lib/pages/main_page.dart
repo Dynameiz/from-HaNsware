@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:from_hansware/pages/home_page.dart';
 import 'package:from_hansware/pages/item_page.dart';
+import 'package:from_hansware/pages/login_page.dart';
 import 'package:from_hansware/pages/setting_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -92,6 +93,7 @@ class _MainPageState extends State<MainPage> {
               leading: const Icon(Icons.light_mode),
               title: Text("Theme", style: GoogleFonts.mulish(),),
               trailing: Switch(
+                activeColor: Colors.green[900],
                 value: _theme, 
                 onChanged: (bool value){
                   setState(() {
@@ -108,12 +110,19 @@ class _MainPageState extends State<MainPage> {
             ),
 
             const SizedBox(height: 10.0,),
-            Divider(color: Colors.grey[500],),
+            Divider(color: Colors.grey[500], indent: 10.0, endIndent: 10.0,),
             const SizedBox(height: 10.0,),
 
             ListTile(
               leading: const Icon(Icons.logout),
               title: Text("Log Out", style: GoogleFonts.mulish(),),
+              onTap: (){
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                  builder: (context) {
+                    return const LoginPage();
+                  }
+                ), (route) => false);
+              },
             ),
           ],
         ),

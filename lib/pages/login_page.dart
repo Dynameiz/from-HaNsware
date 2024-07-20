@@ -65,22 +65,17 @@ class _LoginPageState extends State<LoginPage> {
           child: Center(
               child: Column(
                   children: <Widget>[
-                    // Logo
                     const SizedBox(height: 30,),
                     Image.asset("./assets/logo.png", fit: BoxFit.cover, width: 200.0,),
 
-                    // Text
                     const SizedBox(height: 20,),
                     Text("Ah, welcome back, Tarnished!\nIt's good to see you again.", textAlign: TextAlign.center, style: GoogleFonts.mulish(),),
 
-                    // Username Text Field
                     const SizedBox(height: 30,),
                     usernameTF,
-                    // Password Text Field
                     const SizedBox(height: 10,),
                     passwordTF,
 
-                    // Forgot Password
                     const SizedBox(height: 10,),
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -95,11 +90,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
 
-                    // Login Button
                     const SizedBox(height: 20,),
                     MyButton(onTap: handleLogin, btnText: "Login",),
 
-                    // Sign Up
                     const SizedBox(height: 10,),
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -118,7 +111,6 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
 
-                    // Footer
                     const SizedBox(height: 40.0,),
                     const MyCredit(),
                   ],
