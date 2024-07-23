@@ -4,22 +4,22 @@ import 'package:from_hansware/components/credit.dart';
 import 'package:from_hansware/components/password_field.dart';
 import 'package:from_hansware/components/text_field.dart';
 import 'package:from_hansware/pages/main_page.dart';
-import 'package:from_hansware/pages/register_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
 
-  MyTextField usernameTF = MyTextField(textHint: "Username / Email");
+  MyTextField usernameTF = MyTextField(textHint: "Username");
+  MyTextField emailTF = MyTextField(textHint: "Email");
   MyPasswordField passwordTF = MyPasswordField(textHint: "Password");
 
-  void handleLogin(){
+  void handleRegister(){
     if(usernameTF.getText().isEmpty){
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Tarnished, who might you be?"))
@@ -70,29 +70,17 @@ class _LoginPageState extends State<LoginPage> {
                     Image.asset("./assets/logo.png", fit: BoxFit.cover, width: 200.0,),
 
                     const SizedBox(height: 20,),
-                    Text("Ah, welcome back, Tarnished!\nIt's good to see you again.", textAlign: TextAlign.center, style: GoogleFonts.mulish(),),
+                    Text("Ah, a new face! Welcome, Tarnished.", textAlign: TextAlign.center, style: GoogleFonts.mulish(),),
 
                     const SizedBox(height: 30,),
                     usernameTF,
+                    const SizedBox(height: 10),
+                    emailTF,
                     const SizedBox(height: 10,),
                     passwordTF,
 
-                    const SizedBox(height: 10,),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            "Forgot Password?",
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        ],
-                      ),
-                    ),
-
                     const SizedBox(height: 20,),
-                    MyButton(onTap: handleLogin, btnText: "Sign In",),
+                    MyButton(onTap: handleRegister, btnText: "Sign Up"),
 
                     const SizedBox(height: 10,),
                      Padding(
@@ -101,18 +89,14 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            "Don't have an account? ",
+                            "Already have an account? ",
                             style: TextStyle(color: Colors.grey),
                           ),
                           TextButton(onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context){
-                                  return const RegisterPage();
-                                },
-                              ));
+                              Navigator.pop(context);
                             },
                             child: const Text(
-                            "Sign Up",
+                            "Sign In",
                             style: TextStyle(color: Colors.lightBlue)
                           ),
                           )
@@ -126,7 +110,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
           )
         ),
-
       ),
     );
   }
