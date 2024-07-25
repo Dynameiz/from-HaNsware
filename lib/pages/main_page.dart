@@ -1,12 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:from_hansware/pages/about_page.dart';
 import 'package:from_hansware/pages/home_page.dart';
 import 'package:from_hansware/pages/item_page.dart';
 import 'package:from_hansware/pages/login_page.dart';
-import 'package:from_hansware/pages/setting_page.dart';
+import 'package:from_hansware/pages/history_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MainPage extends StatefulWidget {
@@ -26,15 +24,15 @@ class _MainPageState extends State<MainPage> {
   var bgColorDark = const Color.fromARGB(255, 49, 65, 60);
   
   final List<Widget> _navigationItems = [
-    const Icon(Icons.shopping_cart_outlined, color: Color.fromRGBO(243, 210, 109, 1),),
+    const Icon(Icons.shopping_bag_outlined, color: Color.fromRGBO(243, 210, 109, 1),),
     const Icon(Icons.home_outlined, color: Color.fromRGBO(243, 210, 109, 1)),
-    const Icon(Icons.settings_outlined, color: Color.fromRGBO(243, 210, 109, 1),),
+    const Icon(Icons.receipt_long_outlined, color: Color.fromRGBO(243, 210, 109, 1),),
   ];
 
   final List<Widget> _pages = [
     const ItemPage(),
     const HomePage(),
-    const SettingPage(),
+    const HistoryPage(),
   ];
 
   // ignore: prefer_typing_uninitialized_variables
@@ -46,6 +44,10 @@ class _MainPageState extends State<MainPage> {
     _currentPage = _pages.elementAt(1);
   }
 
+  void openCartPage(){
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +55,7 @@ class _MainPageState extends State<MainPage> {
         title: Text("HaNsware", style: GoogleFonts.mulish(color: Colors.white, fontWeight: FontWeight.bold),),
         backgroundColor: const Color.fromARGB(255, 70, 102, 70),
         iconTheme: const IconThemeData(color: Colors.white),
+        actions: <Widget>[IconButton(onPressed: openCartPage, tooltip: 'Shopping Cart', icon: const Icon(Icons.shopping_cart_outlined))],
       ),
       drawer: Drawer(
         backgroundColor: bgColorLight,
