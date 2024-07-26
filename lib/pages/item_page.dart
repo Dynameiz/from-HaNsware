@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:from_hansware/components/wares_card.dart';
+import 'package:from_hansware/model/my_wares.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ItemPage extends StatefulWidget {
@@ -92,14 +94,33 @@ class _ItemPageState extends State<ItemPage> {
           const SizedBox(height: 10.0,),
           const Divider(indent: 10, endIndent: 10,),
           const SizedBox(height: 10.0,),
-          const Padding(
-            padding: EdgeInsets.all(10),
-            child: SingleChildScrollView(
-              child: null,
-            ),
-          )
+          Expanded(
+            child: _buildAllWares(),
+          ),
+          
         ],
       ),
     );
   }
+  
+  
+
+  _buildAllWares() => GridView.builder(
+    shrinkWrap: true,
+    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 2,
+      crossAxisSpacing: 12,
+      mainAxisSpacing: 12,
+      // childAspectRatio: (300/420),
+      childAspectRatio: 3/4.2
+    ),
+    scrollDirection: Axis.vertical,
+    itemCount: MyWares.allWares.length,
+    itemBuilder: (context, index) {
+      final allWares = MyWares.allWares[index];
+      return WaresCard(wares: allWares,);
+    },
+
+  );
 }
