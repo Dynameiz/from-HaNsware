@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'wares.dart';
+import 'package:http/http.dart' as http;
 
 class MyWares{
   // Dummy Data
-  static List<Wares> allWares = [
+  static List<Wares> dummyWares = [
     Wares(
         id: 1,
         name: 'Black Knife',
@@ -41,11 +43,33 @@ class MyWares{
         name: 'Crafting Kit',
         rarity: 'Common',
         category: 'Crafting',
-        type: 'Essential',
+        type: 'Key Items',
         image: 'assets/crafting.png',
         detail: "Leather bag containing a pestle and mortar, small blade, and various other tools. Enabling tarnished to craft items. Provides both means to fight and means to survive.",
         price: 75000,
         quantity: 8
     ),
   ];
+
+  late Future<List<Wares>> allWares;
+
+  Future<List<Wares>> fetchWares() async{
+    String url = 'https://hansware-backend-production.up.railway.app/wares/';
+
+    var resp = await http.get(Uri.parse(url));
+
+    var result = jsonDecode(resp.body);
+
+    List<Wares> wareList = [];
+
+    for(var i in result){
+      Wares fetchedWares = Wares.fromJson(i);
+      wareList.add(fetchedWares);
+    }
+
+    return wareList;
+  }
+
+  
+
 }

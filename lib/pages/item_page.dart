@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:from_hansware/components/wares_card.dart';
-import 'package:from_hansware/model/my_wares.dart';
+import 'package:from_hansware/models/my_wares.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ItemPage extends StatefulWidget {
@@ -33,28 +33,24 @@ class _ItemPageState extends State<ItemPage> {
     showSpells = true;
     showCrafting = true;
   }
-
   void viewWeapons() {
     showWeapons = true;
     showArmors = false;
     showSpells = false;
     showCrafting = false;
   }
-
   void viewArmors() {
     showWeapons = false;
     showArmors = true;
     showSpells = false;
     showCrafting = false;
   }
-
   void viewSpells() {
     showWeapons = false;
     showArmors = false;
     showSpells = true;
     showCrafting = false;
   }
-
   void viewCrafting() {
     showWeapons = false;
     showArmors = false;
@@ -108,17 +104,16 @@ class _ItemPageState extends State<ItemPage> {
   _buildAllWares() => GridView.builder(
     shrinkWrap: true,
     padding: const EdgeInsets.symmetric(horizontal: 12.0),
-    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 2,
       crossAxisSpacing: 12,
       mainAxisSpacing: 12,
-      // childAspectRatio: (300/420),
-      childAspectRatio: 3/4.2
+      childAspectRatio: ((MediaQuery.of(context).size.height / 4).toDouble() / (MediaQuery.of(context).size.height / 2.8).toDouble()),
     ),
     scrollDirection: Axis.vertical,
-    itemCount: MyWares.allWares.length,
+    itemCount: MyWares.dummyWares.length,
     itemBuilder: (context, index) {
-      final allWares = MyWares.allWares[index];
+      final allWares = MyWares.dummyWares[index];
       return WaresCard(wares: allWares,);
     },
 

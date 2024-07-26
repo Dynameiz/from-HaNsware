@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:from_hansware/model/wares.dart';
+import 'package:from_hansware/models/wares.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -17,8 +17,8 @@ class _WaresCardState extends State<WaresCard> {
 
   NumberFormat formatter = NumberFormat.decimalPatternDigits(
     locale: 'pt',
-    decimalDigits: 2,
-);
+    decimalDigits: 0,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class _WaresCardState extends State<WaresCard> {
               Image.asset('assets/runes.png', height: 32,),
               Text(
                 formatter.format(widget.wares.price),
-                style: GoogleFonts.mulish(fontSize: 20),
+                style: GoogleFonts.mulish(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ],
           ),

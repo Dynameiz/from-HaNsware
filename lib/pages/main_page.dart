@@ -55,7 +55,10 @@ class _MainPageState extends State<MainPage> {
         title: Text("HaNsware", style: GoogleFonts.mulish(color: Colors.white, fontWeight: FontWeight.bold),),
         backgroundColor: const Color.fromARGB(255, 70, 102, 70),
         iconTheme: const IconThemeData(color: Colors.white),
-        actions: <Widget>[IconButton(onPressed: openCartPage, tooltip: 'Shopping Cart', icon: const Icon(Icons.shopping_cart_outlined))],
+        actions: <Widget>[Padding(
+          padding: const EdgeInsets.only(right: 3.0),
+          child: IconButton(onPressed: openCartPage, tooltip: 'Shopping Cart', icon: const Icon(Icons.shopping_cart_outlined)),
+        )],
       ),
       drawer: Drawer(
         backgroundColor: bgColorLight,
