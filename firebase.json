@@ -1,0 +1,25 @@
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "from-hansware",
+                    "appId": "1:640370893478:android:e89d8051a52887e6cc0a67",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "from-hansware",
+                    "configurations": {
+                        "android": "1:640370893478:android:e89d8051a52887e6cc0a67",
+                        "ios": "1:640370893478:ios:795ea928dcb03088cc0a67",
+                        "macos": "1:640370893478:ios:795ea928dcb03088cc0a67",
+                        "web": "1:640370893478:web:14c6ebabf4553f68cc0a67",
+                        "windows": "1:640370893478:web:34f1531139d61566cc0a67"
+                    }
+                }
+            }
+        }
+    }
+}
