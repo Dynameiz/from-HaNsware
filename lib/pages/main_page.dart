@@ -35,13 +35,22 @@ class _MainPageState extends State<MainPage> {
     const HistoryPage(),
   ];
 
+  final List<String> _titles = [
+    'Item',
+    'Home',
+    'History',
+  ];
+
   // ignore: prefer_typing_uninitialized_variables
   var _currentPage;
+  // ignore: prefer_typing_uninitialized_variables
+  var _currentTitle;
 
   @override
   void initState() {
     super.initState();
     _currentPage = _pages.elementAt(1);
+    _currentTitle = _titles.elementAt(1);
   }
 
   void openCartPage(){
@@ -52,7 +61,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("HaNsware", style: GoogleFonts.mulish(color: Colors.white, fontWeight: FontWeight.bold),),
+        title: Text(_currentTitle, style: GoogleFonts.mulish(color: Colors.white, fontWeight: FontWeight.bold),),
         backgroundColor: const Color.fromARGB(255, 70, 102, 70),
         iconTheme: const IconThemeData(color: Colors.white),
         actions: <Widget>[Padding(
@@ -153,6 +162,7 @@ class _MainPageState extends State<MainPage> {
         index: 1,
         onTap: (index){
           _currentPage = _pages.elementAt(index);
+          _currentTitle = _titles.elementAt(index);
           setState(() {
             
           });
