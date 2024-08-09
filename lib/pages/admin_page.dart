@@ -1,14 +1,11 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:from_hansware/components/text_field.dart';
+import 'package:from_hansware/pages/delete_wares.dart';
+import 'package:from_hansware/pages/insert_wares.dart';
+import 'package:from_hansware/pages/update_wares.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
 
 class AdminPage extends StatefulWidget {
-
   const AdminPage({super.key});
 
   @override
@@ -17,141 +14,73 @@ class AdminPage extends StatefulWidget {
 
 class _AdminPageState extends State<AdminPage> {
 
-  final ImagePicker _imagePicker = ImagePicker();
-  String? imageUrl;
+  var bgColorLight = const Color.fromARGB(255, 247, 244, 231);
+  var bgColorLightFocused = const Color.fromARGB(249, 240, 223, 175);
+  var bgColorDark = const Color.fromARGB(255, 49, 65, 60);
 
-  final MyTextField nameTF = MyTextField(textHint: "Name");
-  final MyTextField rarityTF = MyTextField(textHint: "Rarity");
-  final MyTextField categoryTF = MyTextField(textHint: "Category");
-  final MyTextField typeTF = MyTextField(textHint: "Type");
-  final MyTextField detailTF = MyTextField(textHint: "Detail");
-  final MyTextField priceTF = MyTextField(textHint: "Price");
-  final MyTextField quantityTF = MyTextField(textHint: "Quantity");
+  final List<Widget> _navigationItems = [
+    const Icon(Icons.update, color: Color.fromRGBO(243, 210, 109, 1),),
+    const Icon(Icons.add, color: Color.fromRGBO(243, 210, 109, 1)),
+    const Icon(Icons.delete, color: Color.fromRGBO(243, 210, 109, 1),),
+  ];
 
-  Future<XFile> compressImage(String path, int quality) async {
-    final newPath = p.join((await getTemporaryDirectory()).path, '${DateTime.now()}.${p.extension(path)}');
+  final List<Widget> _pages = [
+    const UpdateWares(),
+    const InsertWares(),
+    const DeleteWares()
+  ];
 
-    final result = await FlutterImageCompress.compressAndGetFile(
-      path,
-      newPath,
-      quality: quality,
-    );
+  final List<String> _titles = [
+    'Update',
+    'Insert',
+    'Delete',
+  ];
 
-    return result!;
+  // ignore: prefer_typing_uninitialized_variables
+  var _currentPage;
+  // ignore: prefer_typing_uninitialized_variables
+  var _currentTitle;
+
+  void logout(){
+    
   }
 
-  Future _pickImage(ImageSource source) async {
-    final pickedFile = await _imagePicker.pickImage(source: source, imageQuality: 50);
-    if (pickedFile == null){
-      return;
-    }
-
-    var file = await ImageCropper.platform.cropImage(sourcePath: pickedFile.path, aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1));
-    if (file == null){
-      return;
-    }
-
-    file = (await compressImage(file.path, 35)) as CroppedFile?;
-  }
-
-  Future _selectPhoto() async {
-    await showModalBottomSheet(context: context, builder: (context) => BottomSheet(
-      builder: (context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ListTile(leading: const Icon(Icons.camera), title: const Text('Camera'), onTap: (){
-            Navigator.of(context).pop();
-            _pickImage(ImageSource.camera);
-          },),
-          ListTile(leading: const Icon(Icons.filter), title: const Text('Pick a file'), onTap: (){
-            Navigator.of(context).pop();
-            _pickImage(ImageSource.gallery);
-          },)
-        ],
-      ),
-      onClosing: (){},
-      )
-    );
+  @override
+  void initState() {
+    super.initState();
+    _currentPage = _pages.elementAt(1);
+    _currentTitle = _titles.elementAt(1);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Admin Page",
-          style: GoogleFonts.mulish(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
+        title: Text(_currentTitle, style: GoogleFonts.mulish(color: Colors.white, fontWeight: FontWeight.bold),),
+        backgroundColor: const Color.fromARGB(255, 70, 102, 70),
+        iconTheme: const IconThemeData(color: Colors.white),
+        actions: <Widget>[Padding(
+          padding: const EdgeInsets.only(right: 3.0),
+          child: IconButton(onPressed: logout, tooltip: 'Log Out', icon: const Icon(Icons.logout)),
+        )],
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: _selectPhoto,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Container(
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(8),
-                    width: 240,
-                    height: 240,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        if(imageUrl == null)
-                         const Icon(Icons.add, size: 64,),
-                         const SizedBox(height: 10,),
-                         const Text("Add photo"),
-                        if(imageUrl != null)
-                          InkWell(
-                            splashColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () => _selectPhoto,
-                            child: Image.network(imageUrl!),
-                          ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 10,),
-              nameTF,
-              const SizedBox(height: 10,),
-              rarityTF,
-              const SizedBox(height: 10,),
-              categoryTF,
-              const SizedBox(height: 10,),
-              typeTF,
-              const SizedBox(height: 10,),
-              detailTF,
-              const SizedBox(height: 10,),
-              priceTF,
-              const SizedBox(height: 10,),
-              quantityTF,
-
-              const SizedBox(height: 10,),
-              ElevatedButton(onPressed: () =>{
-                if(nameTF.getText().isEmpty || rarityTF.getText().isEmpty || categoryTF.getText().isEmpty || typeTF.getText().isEmpty || detailTF.getText().isEmpty || priceTF.getText().isEmpty || quantityTF.getText().isEmpty){
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("All fields must be filled!"))
-                  )
-                }
-                else{
-
-
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Data sucessfully added"))
-                  )
-                }
-              }, child: const Text('Submit'))
-            ],
-          ),
-        ),
+      body: Container(
+        color: bgColorLight,
+        child: _currentPage,
+      ),
+      bottomNavigationBar: CurvedNavigationBar(
+        items: _navigationItems,
+        color: const Color.fromARGB(255, 70, 102, 70),
+        backgroundColor: bgColorLight,
+        animationDuration: Durations.medium2,
+        index: 1,
+        onTap: (index){
+          _currentPage = _pages.elementAt(index);
+          _currentTitle = _titles.elementAt(index);
+          setState(() {
+            
+          });
+        },
       ),
     );
   }

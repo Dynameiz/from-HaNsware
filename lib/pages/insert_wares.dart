@@ -17,6 +17,10 @@ class InsertWares extends StatefulWidget {
 
 class _InsertWaresState extends State<InsertWares> {
 
+  var bgColorLight = const Color.fromARGB(255, 247, 244, 231);
+  var bgColorLightFocused = const Color.fromARGB(249, 240, 223, 175);
+  var bgColorDark = const Color.fromARGB(255, 49, 65, 60);
+
   File? _image;
   final _imagePicker = ImagePicker();
 
@@ -106,14 +110,17 @@ class _InsertWaresState extends State<InsertWares> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bgColorLight,
       body: Center(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const SizedBox(height: 20,),
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
-                child: InkWell(
+                child: 
+                InkWell(
                   onTap: () async {
                     await _selectPhoto();
                   },
@@ -151,7 +158,8 @@ class _InsertWaresState extends State<InsertWares> {
               ElevatedButton(
                 onPressed: _handleLogin,
                 child: const Text('Submit')
-              )
+              ),
+              const SizedBox(height: 20,)
             ],
           ),
         )

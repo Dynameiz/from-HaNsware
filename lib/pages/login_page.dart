@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
     if(usernameTF.getText().compareTo('admin') == 0 && passwordTF.textController.text.compareTo('admin') == 0){
       Navigator.push(context, MaterialPageRoute(
         builder: (context){
-          return const InsertWares();
+          return const AdminPage();
         },
       ));
       return;
